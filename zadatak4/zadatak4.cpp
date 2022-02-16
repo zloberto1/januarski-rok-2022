@@ -6,43 +6,34 @@ struct Date {
     int d, m, y;
 };
 
-bool IsValidDate(Date* date) {
-	if((*date).y < 1900 || (*date).y > 2100) return false;
+bool IsValidDate(Date* d) {
+    if((*d).g < 1900 || (*d).g > 2100) return false;
 
-	switch((*date).m) {
-	    case 2: {
-	    	 if((*date).d < 1) return false;
-	        else if((*date).y % 4 == 0 && (*date).d <= 29) return true;
-			 else if((*date).y % 4 != 0 && (*date).d > 28) return false;
-			 else return true;
-			 break;
-	    }
-	    
-	    case 1:
-	    case 3:
-	    case 5:
-	    case 7:
-	    case 8:
-	    case 10:
-	    case 12:{
-	        if((*date).d < 1 || (*date).d > 31) return false;
-			 else return true;
-			 break;
-	    }
-	    
-	    case 4:
-	    case 6:
-	    case 9:
-	    case 11: {
-	        if((*date).d < 1 || (*date).d > 30) return false;
-			 else return true;
-			 break;
-	    }
-	    
-	    default: {
-	        return false;
-	    }
-	}
+    switch((*d).m) {
+        case 2: {
+            if(((*d).g % 4 == 0 && (*d).g % 100 != 0) || (*d).g % 400 == 0) {
+                if((*d).d > 0 && (*d).d < 30) return true;
+                else return false;
+            } else {
+                if((*d).d > 0 && (*d).d < 29) return true;
+                else return false;
+            }
+        }
+
+        case 1: case 3: case 5: case 7: case 8: case 10: case 12: {
+            if((*d).d > 0 && (*d).d < 32) return true;
+            else return false;
+        }
+
+        case 4: case 6: case 9: case 11: {
+            if((*d).d > 0 && (*d).d < 31) return true;
+            else return false;
+        }
+
+        default: {
+            return false;
+        }
+    }
 }
 
 struct Student {
@@ -159,11 +150,11 @@ int main()
             (*(Students + i) + j)->ShowStudent();
         }
     }
-    
+
     for(int i = 0; i < rows; i++) {
         delete[] Students[i];
     }
-    
+
     delete[] Students;
     return 0;
 }
