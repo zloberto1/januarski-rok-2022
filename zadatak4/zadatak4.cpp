@@ -7,11 +7,11 @@ struct Date {
 };
 
 bool IsValidDate(Date* d) {
-    if((*d).g < 1900 || (*d).g > 2100) return false;
+    if((*d).y < 1900 || (*d).y > 2100) return false;
 
     switch((*d).m) {
         case 2: {
-            if(((*d).g % 4 == 0 && (*d).g % 100 != 0) || (*d).g % 400 == 0) {
+            if(((*d).y % 4 == 0 && (*d).y % 100 != 0) || (*d).y % 400 == 0) {
                 if((*d).d > 0 && (*d).d < 30) return true;
                 else return false;
             } else {
@@ -150,6 +150,9 @@ int main()
             (*(Students + i) + j)->ShowStudent();
         }
     }
+
+    cout << "Generacija s najboljim prosjekom: " << BestRow(Students, rows, cols) << endl;
+    cout << "Predmet s najgorim prosjekom: " << WorstCol(Students, rows, cols) << endl;
 
     for(int i = 0; i < rows; i++) {
         delete[] Students[i];
